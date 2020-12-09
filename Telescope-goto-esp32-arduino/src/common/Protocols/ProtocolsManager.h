@@ -16,6 +16,8 @@ public:
     ProtocolsManager(ComunicationInterface &comunicationInterface, AppProtocol &appProtocol, StellariumProtocolSelector &stellariumProtocolSelector, Lx200 &lx200);
     
     void loop();
+
+    static void startTaskImpl(void*);
 };
 
 #endif

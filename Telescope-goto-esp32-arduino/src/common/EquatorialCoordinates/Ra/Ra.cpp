@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 Ra::Ra(int seconds){
-    if (seconds > 86400) throw std::runtime_error("ra value invalid");
+    if (this->seconds > 86400) throw std::runtime_error("ra value invalid");
     this->seconds = seconds;
 }
 Ra::Ra(int hours, int minutes, int seconds){
@@ -43,7 +43,7 @@ std::string Ra::toString(){
     int minutes = tmp / 60;
     tmp -= minutes * 60;
     int seconds = tmp;
-    sprintf(buffer, "%02i:%02i:%02i", hours, minutes, seconds);
+    sprintf(buffer, "%i:%i:%i", hours, minutes, seconds); // todo if < 10 add 0
     return buffer;
 };
 

@@ -1,7 +1,8 @@
 #include "Constraints.h"
 
+#include "../../../Logger.h"
 
-Constraints::Constraints(): stepsAwayFromTopConstraint(0), stepsAwayFromBottomConstraint(0), isTopActive(false), isBottomActive(false){
+Constraints::Constraints(): stepsAwayFromTopConstraint(-1), stepsAwayFromBottomConstraint(-1), isTopActive(false), isBottomActive(false){
 
 }
 
@@ -36,9 +37,14 @@ bool Constraints::isValid(int steps, bool isCounterClockwise){
 }
 
 void Constraints::moveSteps(int steps, bool isCounterClockwise){
+    logger.LOG_I("moveSteps step", steps);
+    logger.LOG_I("moveSteps top", this->stepsAwayFromTopConstraint);
+    logger.LOG_I("moveSteps bottom", this->stepsAwayFromBottomConstraint);
     if(isCounterClockwise){
-        this->stepsAwayFromTopConstraint =- steps;
+        this->stepsAwayFromTopConstraint = this->stepsAwayFromTopConstraint + steps;
+        this->stepsAwayFromBottomConstraint = this->stepsAwayFromBottomConstraint - steps;
     }else{
-        this->stepsAwayFromBottomConstraint =- steps;
+        this->stepsAwayFromBottomConstraint = this->stepsAwayFromBottomConstraint + steps;
+        this->stepsAwayFromTopConstraint = this->stepsAwayFromTopConstraint - steps;
     };
 }

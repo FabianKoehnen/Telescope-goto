@@ -20,9 +20,9 @@ public:
     bool lookAt(EquatorialCoordinates);
     Position& getCurrentPosition();
     DateTime& getCurrentDateTime();
-    // TODO: Setter hinzufügen und im AppProtocolRequestHandler diese benutzen
     Constraints& getStepper1Constraints();
     Constraints& getStepper2Constraints();
+    StepperManager& getStepperManager();
 };
 
 

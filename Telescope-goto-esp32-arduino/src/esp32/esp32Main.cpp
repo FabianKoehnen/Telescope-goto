@@ -32,11 +32,23 @@ StellariumProtocolSelector stellariumProtocolSelector;
 ProtocolsManager protocolsManager(comunicationInterface, appProtocol, stellariumProtocolSelector, lx200);
 bool isProtocolSelected = false;
 
+TaskHandle_t comandLoop;
+
 void setup(){
     comunicationInterface.init("Teleskop GoTo");
+    xTaskCreatePinnedToCore(
+        protocolsManager.startTaskImpl,
+        "comandLoop",
+        8192,
+        &protocolsManager,
+        1,
+        &comandLoop,
+        1
+    );
 }
 
-void loop(){
-    protocolsManager.loop();
+void loop(){ 
+    delay(100000);
+    // protocolsManager.loop();
 }
 

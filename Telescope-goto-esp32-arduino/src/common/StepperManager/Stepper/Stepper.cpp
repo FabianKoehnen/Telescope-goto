@@ -2,8 +2,7 @@
 #include "../../Logger.h"
 
 Stepper::Stepper(GPIOPin stepPin, GPIOPin dirPin, int steps, int microstepping, float gearRatio, Constraints constraints): 
-    stepPin(stepPin), dirPin(dirPin), gearRatio(gearRatio), constraints(constraints){
-        stepsPerRotation = microstepping * steps;
+    stepPin(stepPin), dirPin(dirPin), steps(steps), microstepping(microstepping), gearRatio(gearRatio), constraints(constraints){
     }
 
 Stepper Stepper::stepper1(){
@@ -19,7 +18,7 @@ void Stepper::changeDir(bool clockwise){
 }
 
 bool Stepper::moveDegree(float degree){
-    float degreePerStep = (this->stepsPerRotation * this->gearRatio) / 360;
+    float degreePerStep = (this->steps * this->microstepping * this->gearRatio) / 360;
     int steps = round(degree / degreePerStep);
     if(degree < 0){
         return this->moveSteps((steps * -1), false);
@@ -29,19 +28,30 @@ bool Stepper::moveDegree(float degree){
 }
 
 bool Stepper::moveSteps(int steps, bool clockwise){
-    bool isValid = this->constraints.isValid(steps, !clockwise);
-    if(isValid){
+    if(this->constraints.isActive()){
+        bool isValid = this->constraints.isValid(steps, !clockwise);
+        if(isValid){
+            this->changeDir(clockwise);
+            for (int i = 0; i < steps; i++){
+                this->stepPin.toggle();
+                this->stepPin.toggle();
+            }
+            this->constraints.moveSteps(steps, !clockwise);
+        }
+        return isValid;
+    }else{
         this->changeDir(clockwise);
         for (int i = 0; i < steps; i++){
             this->stepPin.toggle();
+            this->stepPin.toggle();
         }
-        this->constraints.moveSteps(steps, !clockwise);
+        return true;
     }
-    return isValid;
 }
 
 bool Stepper::isValid(int arcseconds){
-    float arcsecondPerStep = this->stepsPerRotation / ((float) (360 * 3600));
+    int stepsPerRotation = this->microstepping * this->steps;
+    float arcsecondPerStep = stepsPerRotation / ((float) (360 * 3600));
     int stepsToDrive = round(arcseconds / arcsecondPerStep);
     logger.LOG_I("Stepper", stepsToDrive);
     if(arcseconds > 0){

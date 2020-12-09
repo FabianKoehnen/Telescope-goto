@@ -2,7 +2,7 @@
 #include <stdexcept>
     
 Dec::Dec(int arcseconds):arcseconds(arcseconds){
-    if (arcseconds > 648000 || arcseconds < -648000) throw std::runtime_error("dec value invalid");
+    if (this->arcseconds > 648000 || this->arcseconds < -648000) throw std::runtime_error("dec value invalid");
     this->arcseconds=arcseconds;
 }
     
@@ -48,7 +48,7 @@ std::string Dec::toString(){
     tmp -= arcminutes * 60;
     int arcseconds = tmp;
 
-    sprintf(buffer, "%c%02i*%02i:%02i", sign, degrees, arcminutes, arcseconds);
+    sprintf(buffer, "%c%i*%i:%i", sign, degrees, arcminutes, arcseconds); // todo if < 10 add 0
     return buffer;
 }
 

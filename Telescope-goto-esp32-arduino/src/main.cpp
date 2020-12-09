@@ -1,5 +1,5 @@
-// Excectued, when compiled on the computer
-// Will start a local TCP Server
+// Wird ausgeführt, wenn das Programm auf einem PC ausgeführt wird.
+// Startet einen localen TCP Server
 #ifdef dev
 
 void setup();

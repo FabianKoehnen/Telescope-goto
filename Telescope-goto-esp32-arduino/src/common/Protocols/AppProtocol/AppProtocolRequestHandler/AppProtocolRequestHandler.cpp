@@ -71,6 +71,11 @@ AppProtocolResponse AppProtocolRequestHandler::onCalibrationRaRequest(AppProtoco
 
 AppProtocolResponse AppProtocolRequestHandler::onMoveRequest(AppProtocolRequest* request){
     AppRequests::Move* move = dynamic_cast<AppRequests::Move*>(request);
+    if(move->isOn()){
+        this->telescope.getStepperManager().startMoving(move->getMotor(), move->isClockwise());
+    }else{
+        this->telescope.getStepperManager().stopMoving(move->getMotor());
+    }
     return AppProtocolResponse::ok();
 }
 

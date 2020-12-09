@@ -1,7 +1,6 @@
 #include "./Lx200.h"
 
 Lx200::Lx200(Lx200RequestHandler &requestHandler): regex(std::regex("([a-zA-Z]*)([\+-\d]*)")),  requestHandler(requestHandler){
-
 }
 
 std::vector<std::string> Lx200::extractComand(std::string rawMsg){

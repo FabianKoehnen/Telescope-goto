@@ -25,3 +25,7 @@ Constraints& Telescope::getStepper1Constraints(){
 Constraints& Telescope::getStepper2Constraints(){
     return this->stepperManager.getStepper2().getConstraints();
 }
+
+StepperManager& Telescope::getStepperManager(){
+    return this->stepperManager;
+}

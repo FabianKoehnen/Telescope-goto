@@ -10,7 +10,8 @@ class Stepper{
 private:
     GPIOPin stepPin;
     GPIOPin dirPin;
-    int stepsPerRotation;
+    int steps;
+    int microstepping;
     float gearRatio;
     Constraints constraints;
 public:

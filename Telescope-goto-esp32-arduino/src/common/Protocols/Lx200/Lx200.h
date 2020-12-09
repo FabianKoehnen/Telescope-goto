@@ -3,6 +3,9 @@
 
 #include "../../Logger.h"
 #include <vector>
+#include <sys/types.h>
+#include <locale>
+#include <iostream>
 #include <regex>
 
 #include "../IProtocol.h"

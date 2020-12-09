@@ -26,6 +26,7 @@ void GPIOPin::toggle(){
     }else{
         this->high();
     }
+    delayMicroseconds(500);
 }
 
 GPIOState GPIOPin::read(){
