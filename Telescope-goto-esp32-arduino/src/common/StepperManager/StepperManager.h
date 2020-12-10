@@ -29,7 +29,8 @@ private:
 public:
     StepperManager();
 
-    bool moveVector(EquatorialCoordinates cords);
+    bool moveVector(Ra );
+    bool moveVector(Dec );
 
     Stepper& getStepper1();
     Stepper& getStepper2();

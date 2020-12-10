@@ -54,10 +54,10 @@ Lx200Response Lx200RequestHandler::handle(Lx200Request request){ // todo cases i
     case Lx200Requests::Q:
         return Lx200Response::null();
     case Lx200Requests::Sr:{
-        bool isValidSr = this->telescope.lookAt(EquatorialCoordinates(Ra::fromString(request.getPayload()), this->telescope.getLooksAt().getDec()));
+        bool isValidSr = this->telescope.lookAt(Ra::fromString(request.getPayload()));
         return Lx200Response::Sr(isValidSr);
     }case Lx200Requests::Sd:{
-        bool isValidSd = this->telescope.lookAt(EquatorialCoordinates(this->telescope.getLooksAt().getRa(), Dec::fromString(request.getPayload())));
+        bool isValidSd = this->telescope.lookAt(Dec::fromString(request.getPayload()));
         return Lx200Response::Sd(isValidSd);
     }case Lx200Requests::unknown:
         return Lx200Response::null();

@@ -17,7 +17,8 @@ private:
 public:
     Telescope(StepperManager&);
     EquatorialCoordinates& getLooksAt();
-    bool lookAt(EquatorialCoordinates);
+    bool lookAt(Ra);
+    bool lookAt(Dec);
     Position& getCurrentPosition();
     DateTime& getCurrentDateTime();
     Constraints& getStepper1Constraints();

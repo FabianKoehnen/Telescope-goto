@@ -6,8 +6,12 @@ EquatorialCoordinates& Telescope::getLooksAt(){
     return this->looksAt;
 }
 
-bool Telescope::lookAt(EquatorialCoordinates cords){
-    return this->stepperManager.moveVector(this->looksAt - cords);
+bool Telescope::lookAt(Ra ra){
+    return this->stepperManager.moveVector(this->looksAt.getRa() - ra);
+}
+
+bool Telescope::lookAt(Dec dec){
+    return this->stepperManager.moveVector(this->looksAt.getDec() - dec);
 }
 
 Position& Telescope::getCurrentPosition(){
