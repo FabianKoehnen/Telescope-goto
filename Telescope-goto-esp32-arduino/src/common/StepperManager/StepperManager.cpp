@@ -2,10 +2,12 @@
 
 StepperManager::StepperManager(): stepper1(Stepper::stepper1()), stepper2(Stepper::stepper2()){}
 
-bool StepperManager::moveVector(EquatorialCoordinates cords){
-    bool isValid1 = this->getStepper1().isValid(cords.getRa().toArcsecond());
-    bool isValid2 = this->getStepper2().isValid(cords.getDec().getArcseconds());
-    return isValid1 && isValid2;
+bool StepperManager::moveVector(Ra ra){
+    return this->getStepper1().isValid(ra.toArcsecond());
+}
+
+bool StepperManager::moveVector(Dec dec){
+    return this->getStepper2().isValid(dec.getArcseconds());
 }
 
 

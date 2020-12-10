@@ -34,9 +34,11 @@ Lx200Response Lx200RequestHandler::handle(Lx200Request request){
     case Lx200Requests::Q:
         return ReturnQ();
     case Lx200Requests::Sr:{
-        return ReturnSr(request);
+        bool isValidSr = this->telescope.lookAt(Ra::fromString(request.getPayload()));
+        return Lx200Response::Sr(isValidSr);
     }case Lx200Requests::Sd:{
-        return ReturnSd(request);
+        bool isValidSd = this->telescope.lookAt(Dec::fromString(request.getPayload()));
+        return Lx200Response::Sd(isValidSd);
     }case Lx200Requests::unknown:
         return Lx200Response::null();
     default:
