@@ -1,7 +1,7 @@
 #include "Lx200Response.h"
 
-Lx200Response::Lx200Response(std::string body){
-    this->setBody(body);
+Lx200Response::Lx200Response(std::string body, bool escaped){
+    this->setBody(body, escaped);
     this->shouldGetSend = true;
 }
 
@@ -13,8 +13,8 @@ std::string Lx200Response::getBody(){
     return this->body;
 }
 
-void Lx200Response::setBody(std::string body){
-    this->body = body + "#";
+void Lx200Response::setBody(std::string body, bool escaped){
+    this->body = body + (escaped ? "#":"");
 }
 
 Lx200Response Lx200Response::GD(Dec dec){
@@ -54,9 +54,9 @@ Lx200Response Lx200Response::GW(std::string info){
 }
 
 Lx200Response Lx200Response::Sr(bool isValid){
-    return isValid ? Lx200Response("1"): Lx200Response("0"); 
+    return isValid ? Lx200Response("1",false): Lx200Response("0",false); 
 }
 
 Lx200Response Lx200Response::Sd(bool isValid){
-    return isValid ? Lx200Response("1"): Lx200Response("0"); 
+    return isValid ? Lx200Response("1",false): Lx200Response("0",false); 
 }
