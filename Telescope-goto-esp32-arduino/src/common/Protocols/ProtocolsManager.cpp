@@ -14,7 +14,7 @@ ProtocolsManager::ProtocolsManager(
 void ProtocolsManager::loop(){
     if(this->comunicationInterface.available()){
         std::string buffer = this->comunicationInterface.recive();
-        // logger.LOG_I("=>", buffer);
+        logger.LOG_I("=>", buffer);
         std::string response = "";
 
         if((buffer.length() != 1 && buffer[buffer.length() - 1] == '#') || buffer[0] == 0x06){
@@ -26,7 +26,7 @@ void ProtocolsManager::loop(){
         }
         
         if(response != ""){
-            // logger.LOG_I("<=", response);
+            logger.LOG_I("<=", response);
             this->comunicationInterface.write(response);
         }
     }

@@ -11,10 +11,10 @@ class Lx200Response{
     protected:
         std::string body;
         bool shouldGetSend;
-        void setBody(std::string body);
+        void setBody(std::string body, bool escaped = true);
     public:
         std::string getBody();
-        Lx200Response(std::string body);
+        Lx200Response(std::string body, bool escaped = true);
         Lx200Response();
 
         static Lx200Response null();
